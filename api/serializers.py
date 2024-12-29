@@ -69,3 +69,17 @@ class PizzaSerializer(serializers.ModelSerializer):
         instance = super().update(instance, validated_data)
 
         return instance
+
+class PizzaSummaryserializer(serializers.ModelSerializer):
+    box = BoxSerializer(read_only=True)
+
+    class Meta:
+        model = Pizza
+        fields = ["id","box","toppings"]
+
+class OrderDetailsSerializer(serializers.ModelSerializer):
+    pizzas = PizzaSummaryserializer(read_only=True, many=True)
+
+    class Meta:
+        model = Order
+        fields = ["id","customer","address","pizzas"]

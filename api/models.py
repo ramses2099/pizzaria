@@ -22,9 +22,8 @@ class Box(models.Model):
         editable=False
     )
 
-    color = models.CharField(primary_key=True,
-                             max_length=64
-    )
+    color = models.CharField(max_length=64, default="white", blank=False, null=False)
+    
 
 
 class Topping(models.Model):
